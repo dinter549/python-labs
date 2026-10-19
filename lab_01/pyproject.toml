@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-lab-01-toolkit"
+version = "0.1.0"
+description = "Калькулятор и конвертер единиц"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov>=7,<8",
+    "ruff",
+    "mypy",
+    "pre-commit",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = [
+    "--cov=toolkit",
+    "--cov-report=term-missing",
+    "--cov-fail-under=81",
+    "--cov-precision=2",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.coverage.run]
+patch = ["subprocess"]

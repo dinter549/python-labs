@@ -1,19 +1,25 @@
 repos:
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.1
+  - repo: local
     hooks:
-      - id: mypy
-        args: [--show-error-codes, --pretty]
-        additional_dependencies:
-          - types-requests
-          - types-PyYAML
+      - id: mypy-lab-01
+        name: mypy (lab_01)
+        entry: python -m mypy
+        language: system
+        args:
+          - --show-error-codes
+          - --pretty
+          - lab_01/src
+          - lab_01/tests
+        files: ^lab_01/.*\.py$
+        pass_filenames: false
+        require_serial: true
 
-
-
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.0
-    hooks:
-      - id: ruff-check
+      - id: ruff-lab-01
+        name: Ruff (lab_01)
+        entry: python -m ruff check
+        language: system
+        files: ^lab_01/.*\.py$
+        types: [python]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
@@ -23,4 +29,5 @@ repos:
       - id: check-json
       - id: end-of-file-fixer
       - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
       - id: check-added-large-files
